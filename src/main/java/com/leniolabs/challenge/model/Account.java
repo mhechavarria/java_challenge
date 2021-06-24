@@ -1,5 +1,9 @@
 package com.leniolabs.challenge.model;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Account {
 
     private String id;
@@ -48,11 +52,18 @@ public class Account {
         this.balance = balance;
     }
 
-    public Account (String id, String name, String lastName, String accountType, Double balance) {
-        this.id = id;
+    public Account(@JsonProperty("id") String id, @JsonProperty("name") String name,
+            @JsonProperty("lastName") String lastName, @JsonProperty("accountType") String accountType,
+            @JsonProperty("balance") Double balance) {
+        if (id == null) {
+            this.id = UUID.randomUUID().toString();
+        } else {
+            this.id = id;
+        }
         this.name = name;
         this.lastName = lastName;
         this.accountType = accountType;
         this.balance = balance;
     }
+
 }
