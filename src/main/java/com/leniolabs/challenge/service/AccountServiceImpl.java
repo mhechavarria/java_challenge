@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Repository("fakeDao")
 public class AccountServiceImpl implements AccounServiceIF {
 
     private static List<Account> accounts = new ArrayList<>();
@@ -27,7 +26,17 @@ public class AccountServiceImpl implements AccounServiceIF {
     }
 
     @Override
-    public Optional<Account> getAccount(String id) {
+    public Optional<Account> getAccountById(String id) {
         return accounts.stream().filter(account -> account.getId().equals(id)).findFirst();
+    }
+
+    @Override
+    public int deleteAccountById(String id) {
+        Optional<Account> existingAccount = getAccountById(id);
+        if (existingAccount.isPresent()) {
+            accounts.remove(existingAccount.get());
+            return 1;
+        }
+        return 0;
     }
 }

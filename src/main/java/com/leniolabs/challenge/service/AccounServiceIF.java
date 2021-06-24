@@ -11,5 +11,8 @@ public interface AccounServiceIF {
 
     public List<Account> getAccounts();
 
-    public Optional<Account> getAccount(String id);
+    public Optional<Account> getAccountById(String id);
+
+    public int deleteAccountById(String id);
+
 }
